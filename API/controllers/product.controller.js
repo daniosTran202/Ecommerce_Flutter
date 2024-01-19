@@ -1,5 +1,5 @@
-const categoryServices = require("../services/category.services");
-const upload = require("../middlewares/category.uploads");
+const productServices = require("../services/product.services");
+const upload = require("../middlewares/product.upload");
 
 exports.create = (req, res, next) => {
   upload(req, res, function (err) {
@@ -10,12 +10,19 @@ exports.create = (req, res, next) => {
         req.file != undefined ? req.file.path.replace(/\\/g, "/") : "";
 
       var model = {
-        categoryName: req.body.categoryName,
-        categoryDescription: req.body.categoryDescription,
-        categoryImage: path != "" ? "/" + path : "",
+        productName: req.body.productName,
+        category: req.body.category,
+        productShortDescription: req.body.productShortDescription,
+        productDescription: req.body.productDescription,
+        productPrice: req.body.productPrice,
+        productSalePrice: req.body.productSalePrice,
+        productSKU: req.body.productSKU,
+        productType: req.body.productType,
+        stockStatus: req.body.stockStatus,
+        productImage: path != "" ? "/" + path : "",
       };
 
-      categoryServices.createCategory(model, (error, results) => {
+      productServices.createProduct(model, (error, results) => {
         if (error) {
           return next(error);
         } else {
@@ -38,13 +45,20 @@ exports.update = (req, res, next) => {
         req.file != undefined ? req.file.path.replace(/\\/g, "/") : "";
 
       var model = {
-        categoryId: req.params.id,
-        categoryName: req.body.categoryName,
-        categoryDescription: req.body.categoryDescription,
-        categoryImage: path != "" ? "/" + path : "",
+        productId: req.params.id,
+        productName: req.body.productName,
+        category: req.body.category,
+        productShortDescription: req.body.productShortDescription,
+        productDescription: req.body.productDescription,
+        productPrice: req.body.productPrice,
+        productSalePrice: req.body.productSalePrice,
+        productSKU: req.body.productSKU,
+        productType: req.body.productType,
+        stockStatus: req.body.stockStatus,
+        productImage: path != "" ? "/" + path : "",
       };
 
-      categoryServices.updateCategory(model, (error, results) => {
+      productServices.updateProduct(model, (error, results) => {
         if (error) {
           return next(error);
         } else {
@@ -61,12 +75,14 @@ exports.update = (req, res, next) => {
 // api/
 exports.findAll = (req, res, next) => {
   var model = {
-    categoryName: req.query.categoryName,
+    productName: req.query.productName,
+    categoryId: req.query.categoryId,
     pageSize: req.query.pageSize,
     page: req.query.page,
+    sort: req.query.sort,
   };
 
-  categoryServices.getAllCategories(model, (error, results) => {
+  productServices.getProducts(model, (error, results) => {
     if (error) {
       return next(error);
     } else {
@@ -80,10 +96,10 @@ exports.findAll = (req, res, next) => {
 
 exports.findOne = (req, res, next) => {
   var model = {
-    categoryId: req.params.id,
+    productId: req.params.id,
   };
 
-  categoryServices.getCategoryById(model, (error, results) => {
+  productServices.getProductById(model, (error, results) => {
     if (error) {
       return next(error);
     } else {
@@ -97,10 +113,10 @@ exports.findOne = (req, res, next) => {
 
 exports.delete = (req, res, next) => {
   var model = {
-    categoryId: req.params.id,
+    productId: req.params.id,
   };
 
-  categoryServices.deleteCategory(model, (error, results) => {
+  productServices.deleteProduct(model, (error, results) => {
     if (error) {
       return next(error);
     } else {

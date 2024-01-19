@@ -28,7 +28,7 @@ async function getAllCategories(params, callback) {
         categoryName: { $regex: new RegExp(categoryName), $option: "i" },
       }
     : {};
-  let perPage = Math.abs(params.pageSize) || MONGO_DB_CONFIG.pageSize;
+  let perPage = Math.abs(params.pageSize) || MONGO_DB_CONFIG.PAGE_SIZE;
   let page = (Math.abs(params.page) || 1) - 1;
   category
     .find(condition, "categoryName categoryImage")

@@ -26,7 +26,9 @@ app.use("/uploads", express.static("uploads"));
 app.use("/api", require("./routes/app.routes"));
 app.use(errors.errorHandler);
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+//Replace with the actual IP address obtained in step 1
 
-app.listen(process.env.port || 4000, function () {
-  console.log("Ready to Go!");
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
 });

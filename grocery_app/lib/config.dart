@@ -1,7 +1,9 @@
 class Config {
   static const String appName = "Grocery App";
-  static const String apiURL = "10.0.0.4:5000";
-  static const String imageURL = "10.0.0.4:5000";
+  static const String apiURL = "127.0.0.1:8080";
+  static const String imageURL = "http://127.0.0.1:8080";
   static const String categoryAPI = "api/category";
+  static const String productAPI = "api/product";
   static const int pageSize = 10;
+  static const String currency = "€";
 }
