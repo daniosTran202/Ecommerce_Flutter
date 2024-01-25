@@ -31,11 +31,13 @@ class ProductsNotifier extends StateNotifier<ProductsState> {
       state = state.copyWith(hasNext: false);
     }
 
-    state = state.copyWith(products: newProducts);
+    Future.delayed(const Duration(milliseconds: 1500), () {
+      state = state.copyWith(products: newProducts);
 
-    _page++;
+      _page++;
 
-    state = state.copyWith(isLoading: false);
+      state = state.copyWith(isLoading: false);
+    });
   }
 
   Future<void> refreshProducts() async {

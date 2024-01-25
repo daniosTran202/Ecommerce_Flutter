@@ -11,8 +11,6 @@ class HomeProductsWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    List<Product> list = List<Product>.empty(growable: true);
-
     return Container(
       color: const Color(0xffF4F7FA),
       child: Column(children: [

@@ -26,7 +26,7 @@ const product = mongoose.model(
         required: true,
       },
       productSalePrice: {
-        type: Double,
+        type: Number,
         required: true,
         default: 0,
       },

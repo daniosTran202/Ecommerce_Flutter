@@ -7,6 +7,19 @@ import 'package:grocery_app/models/category.dart';
 import 'package:grocery_app/models/pagination.dart';
 import 'package:grocery_app/models/product.dart';
 import 'package:grocery_app/models/product_filter.dart';
+import 'package:grocery_app/models/slider.dart';
+
+final homeSliderProvider =
+    FutureProvider.family<List<SliderModel>?, PaginationModel>(
+  (ref, paginationModel) {
+    final sliderRepo = ref.watch(apiService);
+
+    return sliderRepo.getSliders(
+      paginationModel.page,
+      paginationModel.pageSize,
+    );
+  },
+);
 
 final homeCategoriesProvider =
     FutureProvider.family<List<Category>?, PaginationModel>(

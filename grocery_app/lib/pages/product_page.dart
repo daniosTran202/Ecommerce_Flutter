@@ -56,10 +56,10 @@ class _ProductsPageState extends State<ProductsPage> {
 }
 
 class _ProductFilters extends ConsumerWidget {
-  final _sortByOptions = [
-    ProductSortModel(value: "createdAt", label: "Latest"),
-    ProductSortModel(value: "-productPrice", label: "Price: High to Low"),
-    ProductSortModel(value: "productPrice", label: "Price: Low to High")
+  final List<ProductSortModel> _sortByOptions = [
+    ProductSortModel(label: "Latest", value: "createdAt"),
+    ProductSortModel(label: "Price: High to Low", value: "-productPrice"),
+    ProductSortModel(label: "Price: Low to High", value: "productPrice"),
   ];
 
   _ProductFilters({
@@ -140,7 +140,7 @@ class _ProductList extends ConsumerWidget {
         final productViewModel = ref.read(productsNotifierProvider.notifier);
         final producstState = ref.watch(productsNotifierProvider);
 
-        if (productsState.hasNext) {
+        if (producstState.hasNext) {
           productViewModel.getProducts();
         }
       }
