@@ -75,6 +75,7 @@ exports.update = (req, res, next) => {
 // api/
 exports.findAll = (req, res, next) => {
   var model = {
+    productIds: req.query.productIds,
     productName: req.query.productName,
     categoryId: req.query.categoryId,
     pageSize: req.query.pageSize,

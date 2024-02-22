@@ -42,6 +42,23 @@ final homeProductsProvider =
   },
 );
 
+final relatedProductsProvider =
+    FutureProvider.family<List<Product>?, ProductFilterModel>(
+  (ref, productFilterModel) {
+    final apiRepository = ref.watch(apiService);
+
+    return apiRepository.getProducts(productFilterModel);
+  },
+);
+
+final productDetailsProvider = FutureProvider.family<Product?, String>(
+  (ref, productId) {
+    final apiRepository = ref.watch(apiService);
+
+    return apiRepository.getProductDetails(productId);
+  },
+);
+
 final productsFilterProvider =
     StateNotifierProvider<ProductFilterNotifier, ProductFilterModel>(
   (ref) => ProductFilterNotifier(),

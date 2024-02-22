@@ -9,14 +9,12 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: ListView(
-          children: const [
-            HomeSliderWidget(),
-            HomeCategoriesWidget(),
-            HomeProductsWidget(),
-          ],
-        ),
+      body: ListView(
+        children: const [
+          HomeSliderWidget(),
+          HomeCategoriesWidget(),
+          HomeProductsWidget(),
+        ],
       ),
     );
   }

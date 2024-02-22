@@ -87,6 +87,9 @@ class APIService {
     if (productFilterModel.sortBy != null) {
       queryString['sort'] = productFilterModel.sortBy!;
     }
+    if (productFilterModel.productIds != null) {
+      queryString['productIds'] = productFilterModel.productIds!.join(",");
+    }
 
     var url = Uri.http(Config.apiURL, Config.productAPI, queryString);
 
@@ -97,13 +100,25 @@ class APIService {
         var data = jsonDecode(response.body);
         return productFromJson(data["data"]);
       } else {
-        // Handle the error response
-        print('Error: ${response.statusCode}');
         return null;
       }
     } catch (e) {
-      // Handle any exceptions that occur during the request
-      print('Exception: $e');
+      return null;
+    }
+  }
+
+  Future<Product?>? getProductDetails(String productId) async {
+    Map<String, String> requestHeaders = {'Content-Type': 'application/json'};
+
+    var url = Uri.http(Config.apiURL, Config.productAPI + "/" + productId);
+
+    var response = await client.get(url, headers: requestHeaders);
+
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+
+      return Product.fromJson(data["data"]);
+    } else {
       return null;
     }
   }
